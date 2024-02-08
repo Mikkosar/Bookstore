@@ -1,33 +1,45 @@
 package hh.sof3.bookstore.domain;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "book")
 public class Book {
 
     //Attributes
 
-    private String title;
-    private String author;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    private String title, author;
     private int publicationYear;
-    private int isbn;
-    private int prive;
+    private String isbn;
+    private Double price;
 
     //Constructor
 
-    public Book(String title, String author, int publicationYear, int isbn, int prive) {
+    public Book(String title, String author, int publicationYear, String isbn, Double price) {
         this.title = title;
         this.author = author;
         this.publicationYear = publicationYear;
         this.isbn = isbn;
-        this.prive = prive;
+        this.price = price;
     }
 
     //Null Constructor
 
     public Book() {
+        super();
         this.title = null;
         this.author = null;
         this.publicationYear = 0;
-        this.isbn = 0;
-        this.prive = 0;
+        this.isbn = null;
+        this.price = 0.0;
     }
 
     //Setter
@@ -44,12 +56,12 @@ public class Book {
         this.publicationYear = publicationYear;
     }
 
-    public void setIsbn(int isbn) {
+    public void setIsbn(String isbn) {
         this.isbn = isbn;
     }
 
-    public void setPrive(int prive) {
-        this.prive = prive;
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
     //Getter
@@ -66,12 +78,12 @@ public class Book {
         return publicationYear;
     }
 
-    public int getIsbn() {
+    public String getIsbn() {
         return isbn;
     }
 
-    public int getPrive() {
-        return prive;
+    public Double getPrice() {
+        return price;
     }
 
     //ToString
@@ -79,6 +91,6 @@ public class Book {
     @Override
     public String toString() {
         return "Book [title=" + title + ", author=" + author + ", publicationYear=" + publicationYear + ", isbn=" + isbn
-                + ", prive=" + prive + "]";
+                + ", prive=" + price + "]";
     }
 }
