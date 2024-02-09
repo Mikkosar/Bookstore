@@ -44,6 +44,10 @@ public class Book {
 
     //Setter
 
+    public void setId(Long id){
+        this.id = id;
+    }
+
     public void setTitle(String title) {
         this.title = title;
     }
@@ -65,6 +69,10 @@ public class Book {
     }
 
     //Getter
+
+    public Long getId(){
+        return id;
+    }
 
     public String getTitle() {
         return title;
