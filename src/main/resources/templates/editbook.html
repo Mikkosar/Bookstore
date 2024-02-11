@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Book</title>
+    <title>Edit book</title>
 </head>
 <body>
 
-    <h1>Add new book to the list!</h1>
+    <h1>Edit book</h1>
 
     <form action="#" th:action="@{/save}" th:object="${book}" method="post">
-        <p><input type="hidden" th:field="*{id}" /></p>
+        <p><input type="hidden" th:field="*{id}" id="id" readonly="readonly"/></p>
         <p><input type="text" placeholder="Title" th:field="*{title}" /></p>
         <p><input type="text" placeholder="Author" th:field="*{author}" /></p>
         <p><input type="number" placeholder="Publcation Year" th:field="*{publicationYear}" /></p>
