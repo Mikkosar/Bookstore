@@ -1,10 +1,14 @@
 package hh.sof3.bookstore.domain;
 
+import org.hibernate.annotations.ManyToAny;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -21,14 +25,19 @@ public class Book {
     private String isbn;
     private Double price;
 
+    @ManyToOne
+    @JoinColumn(name = "categoryId") // FK
+    private Category category;
+
     //Constructor
 
-    public Book(String title, String author, int publicationYear, String isbn, Double price) {
+    public Book(String title, String author, int publicationYear, String isbn, Double price, Category category) {
         this.title = title;
         this.author = author;
         this.publicationYear = publicationYear;
         this.isbn = isbn;
         this.price = price;
+        this.category = category;
     }
 
     //Null Constructor
@@ -68,6 +77,10 @@ public class Book {
         this.price = price;
     }
 
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
     //Getter
 
     public Long getId(){
@@ -94,11 +107,19 @@ public class Book {
         return price;
     }
 
+    public Category getCategory() {
+        return category;
+    }
+
     //ToString
 
     @Override
     public String toString() {
-        return "Book [title=" + title + ", author=" + author + ", publicationYear=" + publicationYear + ", isbn=" + isbn
+        if (this.category != null)
+            return "Book [title=" + title + ", author=" + author + ", publicationYear=" + publicationYear + ", isbn=" + isbn
+            + ", prive=" + price + ", category= " + this.getCategory() + "]";
+        else
+            return "Book [title=" + title + ", author=" + author + ", publicationYear=" + publicationYear + ", isbn=" + isbn
                 + ", prive=" + price + "]";
     }
 }
