@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import hh.sof3.bookstore.domain.Book;
 import hh.sof3.bookstore.domain.BookRepository;
+import hh.sof3.bookstore.domain.Category;
+import hh.sof3.bookstore.domain.CategoryRepository;
+
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,7 +27,10 @@ import org.springframework.web.bind.annotation.RequestBody;
         @Autowired
         private BookRepository bookRepository;
 
-        //Returns welcome text
+        @Autowired
+        private CategoryRepository categoryRepository;
+
+        //Bookstores starting site, which has list of books.
         //http://localhost:8080/index
 
         @GetMapping(value = "/index")
@@ -67,8 +73,35 @@ import org.springframework.web.bind.annotation.RequestBody;
             return "editbook"; // editbook.html
         }
 
+
+
+        //Bookstores category list.
+
+        @GetMapping(value = "/categorylist")
+        public String categoryList(Model model) {
+
+            model.addAttribute("categories", categoryRepository.findAll());
+
+            return "categoryList"; //categoryList.html
+        }
+
+
+        @GetMapping(value = "/addcategory")
+        public String addNewCategory(Model model) {
+
+            model.addAttribute("category", new Category());
+
+            return "categoryform"; // categoryform.html
+        }
         
-        
+
+        @PostMapping(value = "/savecategory")
+        public String saveCategory(@ModelAttribute Category category){
+            
+            categoryRepository.save(category);
+
+            return "redirect:/categorylist";
+        }
     }
     
     
