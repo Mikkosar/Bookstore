@@ -45,14 +45,19 @@ import org.springframework.web.bind.annotation.RequestBody;
         public String addBook(Model model) {
 
             model.addAttribute("book", new Book());
+            model.addAttribute("categories", categoryRepository.findAll());
 
             return "bookform"; // bookform.html
         }
 
         @PostMapping(value = "/save")
         public String saveBook(@ModelAttribute Book book) {
+            
+            if (book.getTitle() != null && !book.getTitle().isEmpty()){
+                bookRepository.save(book);
+            }
 
-            bookRepository.save(book);
+            
 
             return "redirect:/index";
         }
@@ -71,36 +76,6 @@ import org.springframework.web.bind.annotation.RequestBody;
             model.addAttribute("book", bookRepository.findById(Id));
             
             return "editbook"; // editbook.html
-        }
-
-
-
-        //Bookstores category list.
-
-        @GetMapping(value = "/categorylist")
-        public String categoryList(Model model) {
-
-            model.addAttribute("categories", categoryRepository.findAll());
-
-            return "categoryList"; //categoryList.html
-        }
-
-
-        @GetMapping(value = "/addcategory")
-        public String addNewCategory(Model model) {
-
-            model.addAttribute("category", new Category());
-
-            return "categoryform"; // categoryform.html
-        }
-        
-
-        @PostMapping(value = "/savecategory")
-        public String saveCategory(@ModelAttribute Category category){
-            
-            categoryRepository.save(category);
-
-            return "redirect:/categorylist";
         }
     }
     

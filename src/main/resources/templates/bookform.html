@@ -17,6 +17,17 @@
         <p><input type="number" placeholder="Publcation Year" th:field="*{publicationYear}" /></p>
         <p><input type="text" placeholder="isbn" th:field="*{isbn}" /></p>
         <p><input type="number" placeholder="Price" th:field="*{price}" /></p>
+
+        <p>
+            <label for="deplist">Categories</label>
+            <select id="deplist" th:field="*{category}" class="form-control">
+                <option
+                    th:each="category : ${categories}"
+                    th:value="${category.categoryId}"
+                    th:text="${category.name}"
+                ></option>
+            </select>
+        </p>
         <p><input type="submit" class="btn btn-success" value="Save"></input></p>
     </form>
     
