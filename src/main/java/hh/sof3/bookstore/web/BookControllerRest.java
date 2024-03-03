@@ -36,4 +36,10 @@ public class BookControllerRest {
     public @ResponseBody Optional<Book> bookById(@PathVariable("id") Long bookId) {
         return bookRepository.findById(bookId);
     }
+
+    //Restful service to add book to repo
+    @PostMapping(value = "/books")
+    public @ResponseBody Book saveBook(@RequestBody Book book) {
+        return bookRepository.save(book);
+    }
 }
