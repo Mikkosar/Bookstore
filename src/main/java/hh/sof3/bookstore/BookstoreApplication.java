@@ -12,6 +12,8 @@ import hh.sof3.bookstore.domain.Book;
 import hh.sof3.bookstore.domain.BookRepository;
 import hh.sof3.bookstore.domain.Category;
 import hh.sof3.bookstore.domain.CategoryRepository;
+import hh.sof3.bookstore.domain.User;
+import hh.sof3.bookstore.domain.UserRepository;
 
 @SpringBootApplication
 public class BookstoreApplication {
@@ -21,7 +23,7 @@ public class BookstoreApplication {
 	}
 
 	@Bean
-	public CommandLineRunner books(BookRepository bookRepository, CategoryRepository categoryRepository) {
+	public CommandLineRunner books(BookRepository bookRepository, CategoryRepository categoryRepository, UserRepository userRepository) {
 		return (args) -> {
 
 			List<Book> books = new ArrayList<>();
@@ -41,10 +43,10 @@ public class BookstoreApplication {
 		
 			bookRepository.saveAll(books);
 
-
-
-
+			User user1 = new User("user", "$2a$10$1n7rkAXRA7qj7wUewzMJo.izvELR1VwuuRFt2O5Phl85W6v4M0lIm", "user@gmail.com", "USER");
+			User user2 = new User("admin", "$2a$10$ngu6FPEJMjjBdDtMQNx.o.8YUFK.zskewDwxHnj/a2kil1zYmo6YK", "admin@gmail.com", "ADMIN");
+			userRepository.save(user1);
+			userRepository.save(user2);
 		};
 	}
-
 }

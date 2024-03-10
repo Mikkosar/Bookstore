@@ -1,6 +1,7 @@
 package hh.sof3.bookstore.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -60,6 +61,7 @@ import org.springframework.web.bind.annotation.RequestBody;
         }
 
         @GetMapping(value = "/delete/{id}")
+        @PreAuthorize("hasAuthority('ADMIN')")
         public String deleteBook(@PathVariable("id") Long Id, Model model){
 
             bookRepository.deleteById(Id);
