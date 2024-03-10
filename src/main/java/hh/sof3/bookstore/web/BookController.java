@@ -56,9 +56,6 @@ import org.springframework.web.bind.annotation.RequestBody;
             if (book.getTitle() != null && !book.getTitle().isEmpty()){
                 bookRepository.save(book);
             }
-
-            
-
             return "redirect:/index";
         }
 
@@ -77,6 +74,18 @@ import org.springframework.web.bind.annotation.RequestBody;
             
             return "editbook"; // editbook.html
         }
+
+        @GetMapping(value = "/login")
+        public String loginPage() {
+            return "login"; // login.html
+        }
+
+        @GetMapping(value = "/logout")
+        public String logoutPage(){
+            return "redirect:/login?logout";
+        }
+        
+        
     }
     
     
