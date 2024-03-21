@@ -35,6 +35,7 @@ public class Book {
     //Constructor
 
     public Book(String title, String author, int publicationYear, String isbn, Double price, Category category) {
+        super();
         this.title = title;
         this.author = author;
         this.publicationYear = publicationYear;
@@ -47,11 +48,13 @@ public class Book {
 
     public Book() {
         super();
+        this.id = null;
         this.title = null;
         this.author = null;
         this.publicationYear = 0;
         this.isbn = null;
         this.price = 0.0;
+        this.category = null;
     }
 
     //Setter
